@@ -4,12 +4,12 @@
 
 $location="C:\tempPS\usr\share\doc\arch-wiki\html\en\"
 
-$entries=(Get-ChildItem -Path $location -File *.html)
-$entry=($entries.Name | Out-Gridview -Title "Arch Wiki Offline Browser" -passthru )
+$entries=(Get-ChildItem -Path $location -File *.html -Recurse)
+$entry=($entries | Select-Object Fullname,Name | Out-Gridview -Title "Arch Wiki Offline Browser" -passthru )
 
 if ($null -ne $entry ){
     $entry
-    Start-Process "$location$entry"
+    Start-Process $entry.Fullname
 }else{
     Write-Host "Nothing was selected!"
 }
