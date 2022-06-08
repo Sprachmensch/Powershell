@@ -6,6 +6,5 @@ Collection my of Powershell script/snippets
 Small script to search the offline in the Arch wiki
 
 ``` Powershell
-Write-Host "Test"
-Write-Host "Test"
+Write-Host "Hello World!"
 ```
