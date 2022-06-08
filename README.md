@@ -7,4 +7,5 @@ Small script to search the offline in the Arch wiki
 
 ``` Powershell
 Write-Host "Test"
+Write-Host "Test"
 ```
