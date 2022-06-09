@@ -4,7 +4,7 @@ to do
 - show multiple occurances
 - alphabet -> show "used" letters
 - refactoring
-- sanitize input
+- sanitize input -nums, umlau
 
 - Bugs
 -- "two letters"
@@ -110,14 +110,23 @@ Draw-Alphabet
 while($true)
 {
     Write-Host "Your guess ($counter/5):"
-    $guess=Read-Host
-    Clear-Host
-    Draw-Header
-    
-    if($guess -eq "q")
+    while($true)
     {
-        break
+        $guess=Read-Host
+        if ($guess.Length -eq 5)
+        {
+            break
+        }else{
+            if($guess -eq "q")
+            {
+                break
+            }
+            Write-Host "Bad Input!"
+        }
     }
+    Clear-Host
+    Draw-Header    
+    
     $guess=$guess.ToUpper()
     $used+=$guess
     
