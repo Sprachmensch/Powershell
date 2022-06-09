@@ -4,6 +4,10 @@ to do
 - show multiple occurances
 - alphabet -> show "used" letters
 - refactoring
+- sanitize input
+
+- Bugs
+-- "two letters"
 
     Colors
     Black | DarkBlue | DarkGreen | DarkCyan | DarkRed | DarkMagenta | DarkYellow | Gray | DarkGray | Blue |     
@@ -17,6 +21,8 @@ $alphabet="abcdefghijklmnopqrstvuwxyz".ToUpper()
 
 $counter=4
 $goal="hotel".ToUpper()
+$guess=""
+$goalUsed=$goal
 
 function Draw-Header {    
     Write-Host "               " -Backgroundcolor Green -ForegroundColor Black
@@ -31,9 +37,22 @@ function Draw-Alphabet {
         Write-Host " " -NoNewline
         if($used.Contains($alphabet[$i]))
         {
-            if($goal.Contains($alphabet[$i]))
+            if($goal.Contains($alphabet[$i]) )
             {
-                Write-Host $alphabet[$i] -NoNewline -ForegroundColor Yellow
+                if($goalUsed.Contains($alphabet[$i]))
+                {
+                    #Write-Host $goal.IndexOf($alphabet[$i]) $guess.IndexOf($alphabet[$i])
+                   
+                    if($goal.IndexOf($alphabet[$i]) -eq $guess.IndexOf($alphabet[$i]))
+                    {
+                        Write-Host $alphabet[$i] -NoNewline -ForegroundColor Green
+                    }else{
+                        Write-Host $alphabet[$i] -NoNewline -ForegroundColor Yellow
+                    }
+
+                    $goalUsed= $goalUsed.Replace($alphabet[$i]," ")
+                }
+
             }else{
                 Write-Host $alphabet[$i] -NoNewline -ForegroundColor DarkGray 
             }
@@ -49,9 +68,9 @@ function Draw-Alphabet {
                      Write-Host "  " -NoNewline
             }
         }
-        
     }
-    
+    Write-Host ""
+    Write-Host ""
 }
 
 function Draw-Goal {
@@ -85,8 +104,7 @@ Draw-Header
 Write-Host " X  X  X  X  X " -Backgroundcolor Green -ForegroundColor Black
 Write-Host ""
 Draw-Alphabet
-Write-Host ""
-Write-Host ""
+
 
 
 while($true)
@@ -112,23 +130,19 @@ while($true)
         }else{
             if($goal.Contains($guess[$i]))
             {
-                # ("Greetings from {0} to {1} " -f $users[0],$users[1])
                 Write-Host (" {0} " -f $guess[$i]) -NoNewline -Backgroundcolor Yellow -ForegroundColor Black
             }else
             {
                 Write-Host (" X ") -NoNewline -Backgroundcolor Gray -ForegroundColor Black
             }
         }
-       # Write-Host " " -NoNewline
     }
 
     Write-Host ""
     Write-Host ""
 
     Draw-Alphabet
-  
-    Write-Host ""
-    Write-Host ""
+
 
     # check win
     if($goal -eq $guess)
@@ -136,12 +150,14 @@ while($true)
         Draw-Goal -won $true
         break
     }
-    # check win
+
+    # check lose
     if($counter -ge 5)
     {
         Draw-Goal -won $false
         break
     }
+
     $counter++
 }
 
