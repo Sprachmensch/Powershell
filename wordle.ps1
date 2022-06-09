@@ -15,12 +15,12 @@ to do
     
 #>
 
-$goal = Get-Content -Path ./words.txt | Get-Random
+$goal = @("hotel","essen","liebe","monat","biene") | Get-Random
 $used=""
 $alphabet="abcdefghijklmnopqrstvuwxyz".ToUpper()
 
-$counter=4
-$goal="hotel".ToUpper()
+$counter=1
+$goal=$goal.ToUpper()
 $guess=""
 $goalUsed=$goal
 
@@ -89,9 +89,7 @@ function Draw-Goal {
         $color="Red"
     }
 
-    #Write-Host "               " -Backgroundcolor $color -ForegroundColor Black
     Write-Host $msg -Backgroundcolor $color -ForegroundColor Black
-    #Write-Host "               " -Backgroundcolor $color -ForegroundColor Black
     
     if($won -ne $true){
         Write-Host " WORD WAS $goal    "
@@ -105,22 +103,24 @@ Write-Host " X  X  X  X  X " -Backgroundcolor Green -ForegroundColor Black
 Write-Host ""
 Draw-Alphabet
 
+$gameIsRunning=$true
 
-
-while($true)
+while($gameIsRunning)
 {
     Write-Host "Your guess ($counter/5):"
     while($true)
     {
         $guess=Read-Host
-        if ($guess.Length -eq 5)
+        if ($guess -eq "q")
+        {
+            $gameIsRunning=$false
+            Write-Host "Quitting"
+            break
+        }
+        elseif ($guess.Length -eq 5)
         {
             break
         }else{
-            if($guess -eq "q")
-            {
-                break
-            }
             Write-Host "Bad Input!"
         }
     }
@@ -152,15 +152,12 @@ while($true)
 
     Draw-Alphabet
 
-
-    # check win
     if($goal -eq $guess)
     {
         Draw-Goal -won $true
         break
     }
 
-    # check lose
     if($counter -ge 5)
     {
         Draw-Goal -won $false
