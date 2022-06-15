@@ -6,6 +6,7 @@ Collection my of Powershell script/snippets
 - [wordle.ps1](https://github.com/Sprachmensch/Powershell/blob/main/wordle.ps1) small cli wordle clone
 - [pw_gen.ps1](https://github.com/Sprachmensch/Powershell/blob/main/pw_gen.ps1) quick'n'dirty passwort generator
 - [usb_tethering.ps1](https://github.com/Sprachmensch/Powershell/blob/main/usb_tethering.ps1) enable usb tethering via abd
+- [mocking.ps1](https://github.com/Sprachmensch/Powershell/blob/main/mocking.ps1) needed a script to generate "spongebob" mock meme texts, for reasons..
 - ...
 
 ``` Powershell

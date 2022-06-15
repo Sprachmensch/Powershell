@@ -4,6 +4,7 @@
     -> Submit the PIN via the cli !
 
 #>
+#@todo create a deamon!
 
 Param(
     [Parameter(Mandatory=$True)]
