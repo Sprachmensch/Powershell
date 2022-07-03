@@ -52,3 +52,12 @@ Write-Host "USB Tethering is now enabled"
 
 ./adb.exe kill-server
 Write-Host "Done"
+
+<#
+
+$Begin = Get-Date -Date '15/6/2022 12:23:00'
+$End = Get-Date -Date '15/6/2022 12:27:00'
+Get-EventLog -LogName System  -After $Begin -Before $End
+trying to get the event id when the device is connected, so i can start the script via taskScheduler
+# alt. start the script on user logon
+#>
